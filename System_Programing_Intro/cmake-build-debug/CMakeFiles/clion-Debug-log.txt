@@ -1,1 +1,0 @@
-CMakeLists.txt not found in C:\Users\itayr\Desktop\system_programing_intro Select CMakeLists.txt
