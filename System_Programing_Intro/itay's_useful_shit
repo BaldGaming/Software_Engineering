@@ -19,56 +19,67 @@ methods \ libraries \ algorithms and other things with explanations.
 
 ! OPERATORS !
 ------------------------------------------------------------------------------------------------------------------------
-sizeof()    - Returns the byte size of any expression.
-              Example: `int size = sizeof(int);`
 
-getchar()   - Reads a single character from standard input.
-              Example: `char c = getchar();`
+! MEMORY MANAGEMENT !
+------------------------------------------------------------------------------------------------------------------------
+sizeof()  - Returns the byte size of any expression.
+            Example: `int size = sizeof(int);`
 
-putchar()   - Writes a single character to standard output.
-              Example: `putchar('A');`
+malloc()  - Allocates a specified amount of memory dynamically.
+            Example: `int *ptr = malloc(5 * sizeof(int));`
 
-scanf()     - Reads formatted input from standard input.
-              Example: `int num; scanf("%d", &num);`
+calloc()  - Allocates and initializes an array dynamically.
+            Example: `int *ptr = calloc(5, sizeof(int));`
 
-printf()    - Prints formatted output to standard output.
-              Example: `printf("Number: %d", num);`
-
-fgets()     - Reads a string from standard input with buffer size control.
-              Example: `char str[20]; fgets(str, 20, stdin);`
-
-puts()      - Writes a string to standard output, adding a newline.
-              Example: `puts("Hello, world!");`
-
-strlen()    - Returns the length of a string.
-              Example: `int len = strlen("Hello");`
-
-strcpy()    - Copies a string into another.
-              Example: `char dest[20]; strcpy(dest, "Copy this");`
-
-strcat()    - Concatenates two strings.
-              Example: `char str1[20] = "Hello "; strcat(str1, "World");`
-
-strcmp()    - Compares two strings lexicographically.
-              Example: `if (strcmp("apple", "banana") < 0) { puts("Apple comes first"); }`
-
-strstr()    - Finds a substring within a string.
-              Example: `char *ptr = strstr("Hello World", "World");`
-
-strchr()    - Finds a character within a string.
-              Example: `char *ptr = strchr("Hello", 'e');`
-
-malloc()    - Allocates a specified amount of memory dynamically.
-              Example: `int *ptr = malloc(5 * sizeof(int));`
-
-calloc()    - Allocates and initializes an array dynamically.
-              Example: `int *ptr = calloc(5, sizeof(int));`
-
-free()      - Frees previously allocated memory.
-              Example: `free(ptr);`
-
-realloc()   - Resizes previously allocated memory.
+realloc() - Resizes previously allocated memory.
               Example: `ptr = realloc(ptr, 10 * sizeof(int));`
+
+free()    - Frees previously allocated memory.
+            Example: `free(ptr);`
+
+------------------------------------------------------------------------------------------------------------------------
+
+! INPUT / OUTPUT !
+------------------------------------------------------------------------------------------------------------------------
+getchar() - Reads a single character from standard input.
+            Example: `char c = getchar();`
+
+putchar() - Writes a single character to standard output.
+            Example: `putchar('A');`
+
+scanf()   - Reads formatted input from standard input.
+            Example: `int num; scanf("%d", &num);`
+
+printf()  - Prints formatted output to standard output.
+            Example: `printf("Number: %d", num);`
+
+fgets()   - Reads a string from standard input with buffer size control.
+            Example: `char str[20]; fgets(str, 20, stdin);`
+
+puts()    - Writes a string to standard output, adding a newline.
+            Example: `puts("Hello, world!");`
+
+------------------------------------------------------------------------------------------------------------------------
+
+! STRING HANDLING !
+------------------------------------------------------------------------------------------------------------------------
+strlen() - Returns the length of a string.
+           Example: `int len = strlen("Hello");`
+
+strcpy() - Copies a string into another.
+           Example: `char dest[20]; strcpy(dest, "Copy this");`
+
+strcat() - Concatenates two strings.
+           Example: `char str1[20] = "Hello "; strcat(str1, "World");`
+
+strcmp() - Compares two strings lexicographically.
+           Example: `if (strcmp("apple", "banana") < 0) { puts("Apple comes first"); }`
+
+strstr() - Finds a substring within a string.
+           Example: `char *ptr = strstr("Hello World", "World");`
+
+strchr() - Finds a character within a string.
+           Example: `char *ptr = strchr("Hello", 'e');`
 ------------------------------------------------------------------------------------------------------------------------
 
 
@@ -93,35 +104,41 @@ char pointer       |    %s                     |    8          |    Pointer to c
 
 ! PROGRAMMING FUNDAMENTALS !
 ------------------------------------------------------------------------------------------------------------------------
-if -         Executes code if a condition is true.
-             Example: `if (x > 0) { printf("Positive"); }`
+if -               Executes code if a condition is true.
+                   Example: `if (x > 0) { printf("Positive"); }`
 
-if else -    Adds an alternative block when the condition is false.
-             Example: `if (x > 0) { printf("Positive"); } else { printf("Negative"); }`
+if else -          Adds an alternative block when the condition is false.
+                   Example: `if (x > 0) { printf("Positive"); } else { printf("Negative"); }`
 
-switch -     Selects from multiple cases based on a value.
-             Example: `switch (x) { case 1: printf("One"); break; }`
+switch -           Selects from multiple cases based on a value.
+                   Example:  `switch (ch) {
+                                 case 'y': case 'Y':
+                                     printf("Yes");
+                                     break;
+                                 default:
+                                     printf("No"); }`
 
-while -      Loops while a condition is true.
-             Example: `while (x < 10) { x++; }`
+while -            Loops while a condition is true.
+                   Example: `while (x < 10) { x++; }`
 
-do while -   Executes the loop body at least once, then repeats while a condition is true.
-             Example: `do { x++; } while (x < 10);`
+do while -         Executes the loop body at least once, then repeats while a condition is true.
+                   Example: `do { x++; } while (x < 10);`
 
-for -        Loops a fixed number of times.
-             Example: `for (int i = 0; i < 5; i++) { printf("%d", i); }`
+for -              Loops a fixed number of times.
+                   Example: `for (int i = 0; i < 5; i++) { printf("%d", i); }`
 
-             A for loop can also go in reverse.
-             Example: `for (int i = 5; i > 0; i--) { printf("%d", i); }`
+                   A for loop can also go in reverse.
+                   Example: `for (int i = 5; i > 0; i--) { printf("%d", i); }`
 
-casting -    Converts one data type into another, either implicitly or explicitly.
-             Example: `float f = (float)5 / 2;`
+casting -          Converts one data type into another, either implicitly or explicitly.
+                   Example: `float f = (float)5 / 2;`
 
-function -   Defines reusable code.
-             Example: `int add(int a, int b) { return a + b; }`
+function -         Defines reusable code.
+                   Example: `int add(int a, int b) { return a + b; }`
 
-structures - Groups multiple variables into one type.
-             Example: `struct Person { char name[20]; int age; };`
+ternary operator - Shorthand for `if-else` using `?` and `:`.
+                   Example: `(age >= 18) ? printf("Adult") : printf("Minor");`
+
 ------------------------------------------------------------------------------------------------------------------------
 
 
@@ -129,22 +146,29 @@ structures - Groups multiple variables into one type.
 ------------------------------------------------------------------------------------------------------------------------
 pointer (*) -         Stores the memory address of a variable, allowing indirect access to its value.
                       Example: `int x = 10; int *ptr = &x;` (ptr now holds the address of x)
+                      Dereferencing with `*ptr` retrieves the value at the address (e.g., 10).
 
 ampersand (&) -       Used to obtain the memory address of a variable, often for initializing pointers.
                       Example: `ptr = &x;` (retrieves x’s address and assigns it to ptr)
 
-double pointer (**) - A pointer that stores the address of another pointer, useful in advanced memory operations.
+double pointer (**) - A pointer that stores the address of another pointer.
                       Example: `int **dblPtr = &ptr;` (dblPtr holds the address of ptr, which holds x’s address)
 
 NULL -                Represents an empty or invalid pointer, preventing it from pointing to unintended memory.
                       Example: `ptr = NULL;` (ptr now doesn’t point to any valid memory location)
+                      Defined in `<stdio.h>` and equivalent to `0` in pointer contexts.
+
 ------------------------------------------------------------------------------------------------------------------------
 
 
 ! ARRAYS & STRINGS !
 ------------------------------------------------------------------------------------------------------------------------
 array -            A collection of variables stored in contiguous memory, accessed using an index.
-                   Example: `int arr[5] = {1, 2, 3, 4, 5};`
+                   Example: `int arr[5] = {1, 2, 3, 4, 5};
+                             char str1[] = {'H', 'e', 'l', 'l', 'o', '\0'};
+                             char str2[10] = "Hello";
+                             char str3[] = "Hello";`
+                   Also,    `arr[0]` is equivalent to `*(arr + 0)`, where it points to the first element.
 
 string -           An array of characters terminated by a null character (`\0`).
                    Example: `char str[] = "Hello";`
@@ -154,6 +178,95 @@ matrix array -     A nested array structure storing data in rows and columns.
 
 null termination - The special `'\0'` character marking the end of a string in memory.
                    Example: `char str[] = {'H', 'e', 'l', 'l', 'o', '\0'};`
+------------------------------------------------------------------------------------------------------------------------
+
+
+! STRUCTURES !
+------------------------------------------------------------------------------------------------------------------------
+structure -     A user-defined variable type that groups multiple variables under one name.
+                Unlike arrays, a structure can hold multiple data types, and members are accessed by name (not index).
+                Example: `struct Person {
+                             char name[10];
+                             int age;
+                             char address[20];
+                         };`
+
+declaration -   Once defined, you can create variables or pointers to the structure type.
+                Example: `struct Person x; struct Person *y;`
+
+access -        Use dot `.` to access members:        `x.age = 30;`
+                Use arrow `->` with pointers:         `y->age = 30;`
+
+typedef -       Used to avoid repeating `struct` keyword on every declaration.
+                Example: `typedef struct {
+                             char name[10];
+                             int age;
+                             char address[20];
+                         } Person;
+                         Person moshe; Person *kid;`
+
+assignment -    You can copy the contents of one struct into another directly.
+                Example: `Person a = {"A", 20, "X"}; Person b = a;`
+
+functions -     Passing structs to functions makes a copy (changes don’t persist).
+                To modify, pass a pointer instead: `void update(Person *p) { p->age = 25; }`
+------------------------------------------------------------------------------------------------------------------------
+
+
+! FILES !
+------------------------------------------------------------------------------------------------------------------------
+formats -       Two file formats exist:
+                1. Text  – stored in ASCII character form.
+                2. Binary – stored exactly as in memory (raw bytes).
+
+steps -         1. Open the file (fopen).
+                2. Read/write using file functions.
+                3. Close the file (fclose).
+
+open -          fopen returns a FILE pointer. Always check for NULL.
+                Example: `FILE *f = fopen("data.txt", "rt");`
+                Modes: "r", "w", "a", "r+", "w+" + 't' or 'b' for text/binary.
+
+mode meanings - r   – read only       (fails if file doesn't exist)
+                w   – write only      (clears the file)
+                a   – append only     (adds to end)
+                r+  – read/write      (must exist)
+                w+  – write/read      (clears and overwrites)
+
+close -         Use fclose to close and save file: `fclose(f);`
+                exit(1) auto-closes all files.
+
+seek -          fseek moves the file pointer.
+                `fseek(FILE *fp, long offset, int origin);`
+                origin: SEEK_SET (start), SEEK_CUR (current), SEEK_END (end)
+
+eof -           EOF = -1, marks end of file. Used in loops like:
+                `while ((c = fgetc(f)) != EOF) {...}`
+
+text I/O -      fscanf  - formatted input:     `fscanf(f, "%d %s", &x, str);`
+                fprintf - formatted output:    `fprintf(f, "%d %s", x, str);`
+                fgets   - read string:         `fgets(buf, size, f);`
+                fputs   - write string:        `fputs("text", f);`
+                fgetc   - read char:           `char c = fgetc(f);`
+                fputc   - write char:          `fputc('A', f);`
+
+standard I/O -  stdin  – keyboard
+                stdout – screen
+                stderr – errors
+
+stdlib -        atoi from <stdlib.h> converts string to int:
+                `char *s = "-123"; int x = atoi(s); // x = -123`
+
+example -       Reading 3 digits (no delimiter) from file into int:
+                `char str[4]; fgets(str, 4, f); int num = atoi(str);`
+
+ftell -         Returns number of bytes from file start to current:
+                `fseek(f, 0, SEEK_END); int size = ftell(f)/3;`
+
+rewind -        Resets pointer to file start: `rewind(f);`
+remove -        Deletes file: `remove("file.txt");`
+rename -        Renames file: `rename("old.txt", "new.txt");`
+feof -          Checks if end of file reached: `while (!feof(f)) {...}`
 ------------------------------------------------------------------------------------------------------------------------
 
 
