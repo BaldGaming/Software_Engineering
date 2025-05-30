@@ -264,8 +264,11 @@ ftell -         Returns number of bytes from file start to current:
                 `fseek(f, 0, SEEK_END); int size = ftell(f)/3;`
 
 rewind -        Resets pointer to file start: `rewind(f);`
+
 remove -        Deletes file: `remove("file.txt");`
+
 rename -        Renames file: `rename("old.txt", "new.txt");`
+
 feof -          Checks if end of file reached: `while (!feof(f)) {...}`
 ------------------------------------------------------------------------------------------------------------------------
 
