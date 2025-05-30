@@ -216,75 +216,139 @@ functions -     Passing structs to functions makes a copy (changes don’t persi
 ! FILES !
 ------------------------------------------------------------------------------------------------------------------------
 formats -       Two file formats exist:
-                1. Text   – Stored in ASCII character form.
-                2. Binary – Stored as raw memory bytes.
+                1. Text  – stored in ASCII character form.
+                2. Binary – stored exactly as in memory (raw bytes).
 
-fopen() -       opens a file and returns a FILE pointer.
-                Always check if the result is NULL.
+steps -         1. Open the file (fopen).
+                2. Read/write using file functions.
+                3. Close the file (fclose).
+
+open -          fopen returns a FILE pointer. Always check for NULL.
                 Example: `FILE *f = fopen("data.txt", "rt");`
                 Modes: "r", "w", "a", "r+", "w+" + 't' or 'b' for text/binary.
 
-mode meanings - "r"   – Read only        (fails if file doesn't exist)
-                "w"   – Write only       (clears file if exists)
-                "a"   – Append only      (writes to end of file)
-                "r+"  – Read/write       (file must exist)
-                "w+"  – Write/read       (clears file)
+mode meanings - r   – read only       (fails if file doesn't exist)
+                w   – write only      (clears the file)
+                a   – append only     (adds to end)
+                r+  – read/write      (must exist)
+                w+  – write/read      (clears and overwrites)
 
-fclose() -      closes a file.
-                Example: `fclose(f);`
-                exit() auto-closes all files.
+close -         Use fclose to close and save file: `fclose(f);`
+                exit(1) auto-closes all files.
 
-fgetc() -       Reads a single character from file.
-                Example: `char c = fgetc(f);`
+seek -          fseek moves the file pointer.
+                `fseek(FILE *fp, long offset, int origin);`
+                origin: SEEK_SET (start), SEEK_CUR (current), SEEK_END (end)
 
-fputc() -       Writes a single character to file.
-                Example: `fputc('A', f);`
+eof -           EOF = -1, marks end of file. Used in loops like:
+                `while ((c = fgetc(f)) != EOF) {...}`
 
-fgets() -       Reads a string from file with buffer size.
-                Example: `char str[20]; fgets(str, 20, f);`
+text I/O -      fscanf  - formatted input:     `fscanf(f, "%d %s", &x, str);`
+                fprintf - formatted output:    `fprintf(f, "%d %s", x, str);`
+                fgets   - read string:         `fgets(buf, size, f);`
+                fputs   - write string:        `fputs("text", f);`
+                fgetc   - read char:           `char c = fgetc(f);`
+                fputc   - write char:          `fputc('A', f);`
 
-fputs() -       Writes a string to file.
-                Example: `fputs("Hello", f);`
+standard I/O -  stdin  – keyboard
+                stdout – screen
+                stderr – errors
 
-fscanf() -      Reads formatted input from file.
-                Example: `fscanf(f, "%d %s", &x, str);`
+stdlib -        atoi from <stdlib.h> converts string to int:
+                `char *s = "-123"; int x = atoi(s); // x = -123`
 
-fprintf() -     Writes formatted output to file.
-                Example: `fprintf(f, "%d %s", x, str);`
+example -       Reading 3 digits (no delimiter) from file into int:
+                `char str[4]; fgets(str, 4, f); int num = atoi(str);`
 
-feof() -        Checks if end-of-file has been reached.
-                Example: `while (!feof(f)) { ... }`
+ftell -         Returns number of bytes from file start to current:
+                `fseek(f, 0, SEEK_END); int size = ftell(f)/3;`
 
-EOF -           A constant (-1) used to mark end of file.
-                Example: `while ((c = fgetc(f)) != EOF) { ... }`
+rewind -        Resets pointer to file start: `rewind(f);`
+remove -        Deletes file: `remove("file.txt");`
+rename -        Renames file: `rename("old.txt", "new.txt");`
+feof -          Checks if end of file reached: `while (!feof(f)) {...}`
+------------------------------------------------------------------------------------------------------------------------
 
-fseek() -       Moves file pointer to a specific location.
-                Example: `fseek(f, 0, SEEK_END);`
 
-                Origin values:
-                SEEK_SET / 0 - beginning
-                SEEK_CUR / 1 - current
-                SEEK_END / 2 - end
+! BITWISE OPERATIONS !
+------------------------------------------------------------------------------------------------------------------------
+AND  &             Copies a bit to the result if it exists in both operands.
+                    Example: `unsigned int c = a & b;`
 
-ftell() -       Returns current byte offset in file.
-                Example: `int pos = ftell(f);`
+OR   |             Copies a bit to the result if it exists in either operand.
+                    Example: `unsigned int c = a | b;`
 
-rewind() -      Resets file pointer to the beginning.
-                Example: `rewind(f);`
+XOR  ^             Copies a bit to the result if it exists in one operand only.
+                    Example: `unsigned int c = a ^ b;`
 
-remove() -      Deletes a file.
-                Example: `remove("file.txt");`
+NOT  ~             Inverts all bits of the operand.
+                    Example: `unsigned int c = ~a;`
 
-rename() -      Renames a file.
-                Example: `rename("old.txt", "new.txt");`
+Left Shift   <<    Shifts all bits of the operand left by a specified number of positions.
+                    Example: `a = a << 2;`
 
-stdin / stdout /
-stderr -        Standard input/output/error streams.
-                Used by functions like printf, scanf, getchar, etc.
+Right Shift  >>    Right shift. Shifts all bits of the operand right by a specified number of positions.
+                    Example: `b = b >> 1;`
 
-atoi() -        Converts string to int (from <stdlib.h>).
-                Example: `char *s = "123"; int x = atoi(s);`
+XOR swap –         Swaps two variables without a temporary using XOR.
+                    Example:
+                    int one = 12, two = 10; // one=1100, two=1010
+                    one ^= two;             // one=0110, two=1010
+                    two ^= one;             // one=0110, two=1100
+                    one ^= two;             // one=1010, two=1100
+------------------------------------------------------------------------------------------------------------------------
 
+
+! LINKED LISTS !
+------------------------------------------------------------------------------------------------------------------------
+Linked list – A dynamic data structure where each element points to the next, allowing efficient insertions and deletions.
+                Example:
+               typedef struct Node
+               {
+                   /* data fields */
+                   struct Node* next;  /* pointer to next node */
+               } Node;
+
+Head pointer – Points to the first node; must be initialized to NULL.
+                Example: `Node* head = NULL;`
+
+Insert at head – Always allocate dynamically:
+               
+               Node* temp = malloc(sizeof(Node));
+               /* initialize data in temp */
+               temp->next = head;
+               head = temp;
+
+Insert after a node – Given pointer `prev`:
+               
+               Node* temp = malloc(sizeof(Node));
+               /* initialize data in temp */
+               temp->next = prev->next;
+               prev->next = temp;
+
+Insert at tail – Maintain a tail pointer to avoid scanning:
+               
+               Node* temp = malloc(sizeof(Node));
+               /* initialize data in temp */
+               tail->next = temp;
+               tail = temp;
+
+Delete head – Remove the first node:
+               
+               Node* temp = head;
+               head = head->next;
+               free(temp);
+
+Notes:
+  - Always check for NULL before inserting or deleting.
+  - Free nodes to avoid memory leaks.
+  - For a doubly linked list, use both `next` and `prev` pointers:
+
+    typedef struct DNode
+    {
+        /* data fields */
+        struct DNode *next, *prev;
+    } DNode;
 ------------------------------------------------------------------------------------------------------------------------
 
 
